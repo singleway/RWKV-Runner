@@ -830,6 +830,11 @@ def set_rwkv_config(model: AbstractRWKV, body: ModelConfigBody):
         model.global_penalty = body.global_penalty
     if body.state is not None:
         load_rwkv_state(model, body.state, False)
+    else:
+        if "-7B-" in model.model_path:
+            load_rwkv_state(model, "./states/rwkv-x060-OnlyForChnNovel_小说扩写-7B-20240806-ctx4096.pth", False)
+        elif "-3B-" in model.model_path:
+            load_rwkv_state(model, "./states/rwkv-x060-OnlyForChnNovel_小说扩写-3B-20240827-ctx4096.pth", False)
 
 
 def get_rwkv_config(model: AbstractRWKV) -> ModelConfigBody:
